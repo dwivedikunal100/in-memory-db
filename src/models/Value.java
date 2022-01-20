@@ -15,21 +15,15 @@ public class Value<T> implements Comparable<Value>{
     public Value(T value, DataType dataType, List<Constraint> columnConstraints){
         this.dataType = dataType;
         this.value = value;
-
         for(Constraint constraints: columnConstraints){
             constraints.apply(value);
         }
-
         if(dataType instanceof StringDataType){
             ((StringDataType)dataType).validate((String)value);
         } else{
             ((IntDataType)dataType).validate(Integer.parseInt((String)value));
         }
-
-
     }
-
-
 
 
     @Override
@@ -38,7 +32,6 @@ public class Value<T> implements Comparable<Value>{
       String v= (String)o.value;
         return t.compareTo(v);
     }
-
 
     @Override
     public String toString() {

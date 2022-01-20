@@ -14,45 +14,40 @@ import java.util.List;
 
 public class TableController {
 
-    HashMap<String,Table> tables;
+    // Todo: Create TableProcessor which should communicate with TableDao
+    HashMap<String, Table> tables;
 
-    public TableController(){
+    public TableController() {
         tables = new HashMap<>();
     }
 
     public void createTable(String tableName, HashMap<String, List<Constraint>> columns, HashMap<String, DataType> dataTypeHashMap) {
-        if(tables.containsKey(tableName)){
+        if (tables.containsKey(tableName)) {
             throw new TableAlreadyExistsException();
-        }else{
-            tables.put(tableName,new Table(tableName,columns,dataTypeHashMap));
-          //  System.out.println(tables.get(tableName));
+        } else {
+            tables.put(tableName, new Table(tableName, columns, dataTypeHashMap));
         }
 
     }
 
-    public void addToTable(String tableName, HashMap<String, String> rows){
-        if(tables.containsKey(tableName)==false){
-            throw  new TableNotExistsException();
-        }else{
+    public void addToTable(String tableName, HashMap<String, String> rows) {
+        if (tables.containsKey(tableName) == false) {
+            throw new TableNotExistsException();
+        } else {
             Table table = tables.get(tableName);
             table.addValue(rows);
-
         }
     }
 
-    public void searchTable(String tableName,String colName,String value){
-        if(tables.containsKey(tableName)==false){
-            throw  new TableNotExistsException();
-        }else{
+    public void searchTable(String tableName, String colName, String value) {
+        if (tables.containsKey(tableName) == false) {
+            throw new TableNotExistsException();
+        } else {
             Table table = tables.get(tableName);
-
-            System.out.println(table.searchValue(colName,value));
-
+            System.out.println(table.searchValue(colName, value));
         }
 
     }
-
-
 
 
 }
